@@ -78,7 +78,8 @@ main {
   font-size: 0.98rem;
 }
 
-.siteNav nav {
+.siteNav nav,
+.desktopNav {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -98,6 +99,85 @@ main {
 }
 
 .siteNav nav a.active {
+  background: white;
+  color: var(--navy);
+}
+
+.menuToggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  cursor: pointer;
+  place-items: center;
+  padding: 10px;
+}
+
+.menuToggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menuToggle.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuToggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 74px;
+  left: 50%;
+  z-index: 19;
+  width: min(420px, calc(100% - 28px));
+  transform: translate(-50%, -12px);
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 20px;
+  background: rgba(6, 31, 45, 0.88);
+  box-shadow: 0 24px 70px rgba(8, 47, 73, 0.34);
+  backdrop-filter: blur(18px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mobileMenu.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.mobileMenu nav {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.mobileMenu a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 850;
+}
+
+.mobileMenu a.active {
   background: white;
   color: var(--navy);
 }
@@ -1125,13 +1205,19 @@ blockquote,
 
 @media (max-width: 860px) {
   .siteNav {
-    position: absolute;
+    position: fixed;
     top: 12px;
     transform: translateX(-50%);
+    border-radius: 20px;
+    padding: 10px 10px 10px 16px;
   }
 
-  .siteNav nav {
+  .siteNav .desktopNav {
     display: none;
+  }
+
+  .menuToggle {
+    display: grid;
   }
 
   .hero {

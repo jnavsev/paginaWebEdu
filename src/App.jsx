@@ -6,7 +6,7 @@ import educationImage from "./assets/educacion-ambiental.png";
 import smartPortImage from "./assets/smart-port-dashboard.png";
 import cleanupBoatImage from "./assets/limpieza-superficial.png";
 import portMapImage from "./assets/mapa-puerto-calpe-puntos.png";
-import groupImage from "./assets/grupo-investigacion-c2.png";
+import groupImage from "./assets/grupo-investigacion-c2-local.png";
 
 const navItems = [
   ["Inicio", "/"],
@@ -178,6 +178,13 @@ function Icon({ name }) {
 }
 
 function Layout() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   return (
     <main>
       <header className="siteNav">
@@ -185,14 +192,34 @@ function Layout() {
           <span>Calpe</span>
           <strong>Smart Coast</strong>
         </NavLink>
-        <nav aria-label="Navegación principal">
+        <nav className="desktopNav" aria-label="Navegación principal">
           {navItems.map(([label, to]) => (
             <NavLink key={to} to={to} end={to === "/"}>
               {label}
             </NavLink>
           ))}
         </nav>
+        <button
+          className={`menuToggle ${menuOpen ? "open" : ""}`}
+          type="button"
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </header>
+      <div className={`mobileMenu ${menuOpen ? "open" : ""}`}>
+        <nav aria-label="Navegación móvil">
+          {navItems.map(([label, to]) => (
+            <NavLink key={to} to={to} end={to === "/"}>
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/problema" element={<ProblemPage />} />
