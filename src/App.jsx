@@ -6,7 +6,7 @@ import educationImage from "./assets/educacion-ambiental.png";
 import smartPortImage from "./assets/smart-port-dashboard.png";
 import cleanupBoatImage from "./assets/limpieza-superficial.png";
 import portMapImage from "./assets/mapa-puerto-calpe-puntos.png";
-import groupImage from "./assets/grupo-investigacion-c2-local.png";
+import groupImage from "./assets/grupo-investigacion-c2.png";
 
 const navItems = [
   ["Inicio", "/"],
